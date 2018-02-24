@@ -24,6 +24,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # A gem to automate using jQuery with Rails https://github.com/rails/jquery-rails
 gem 'jquery-rails'
+# Build responsive, mobile-first projects on the web with the world's most popular front-end component library http://getbootstrap.com/
+gem 'bootstrap', '~> 4.0.0'
 
 # Flexible authentication solution for Rails with Warden https://github.com/plataformatec/devise
 gem 'devise'
