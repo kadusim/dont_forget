@@ -28,4 +28,14 @@ RSpec.describe List, type: :model do
     expect(list).to_not be_valid
   end
 
+  it "has_many List" do
+    assc = described_class.reflect_on_association(:list)
+    expect(assc.macro).to eq :has_many
+  end
+
+  it "belongs to User" do
+    assc = described_class.reflect_on_association(:user)
+    expect(assc.macro).to eq :belongs_to
+  end
+
 end
