@@ -1,0 +1,24 @@
+<h1>Lists#index</h1>
+<p>Find me in app/views/lists/index.html.erb</p>
+
+
+
+<p>Listas de tarefas</p>
+
+
+<% @list.each do |l| %>
+  <ul>
+    <li>
+      <%= l.name %>
+      <%= link_to 'Show', list_path(l) %>
+      <%= link_to 'Destroy', l, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  </ul>
+<% end %>
+
+<p>Nova tarefa</p>
+
+<%= form_for(List.new) do |f| %>
+  <%= f.text_field :name, class: "validate"%>
+  <%= f.submit %>
+<% end %>
