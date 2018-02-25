@@ -35,7 +35,7 @@ class ListsController < ApplicationController
     respond_to do |format|
       if @list.update(list_params_update)
         format.json { render json: true }
-        format.html
+        format.html { redirect_to edit_list_path(@list) }
       else
         format.json { render json: @list.errors, status: :unprocessable_entity }
         format.html
