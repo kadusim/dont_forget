@@ -18,11 +18,11 @@ class ListsController < ApplicationController
     @list = List.new(name: list_params_create[:name], type_access: :private_me, status: :open, user: current_user)
     respond_to do |format|
       if @list.save
-        format.json { render json: @list }
+        flash[:success] = 'List was successfully created.'
         format.html { redirect_to edit_list_path(@list) }
       else
-        format.json { render json: @list.errors, status: :unprocessable_entity }
-        format.html
+        flash[:error] = 'Could not created List.'
+        format.html { redirect_to lists_path }
       end
     end
   end
@@ -34,11 +34,11 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params_update)
-        format.json { render json: true }
+        flash[:success] = 'List was successfully saved.'
         format.html { redirect_to edit_list_path(@list) }
       else
-        format.json { render json: @list.errors, status: :unprocessable_entity }
-        format.html
+        flash[:error] = 'Could not saved List.'
+        format.html { redirect_to lists_path }
       end
     end
   end
@@ -46,7 +46,7 @@ class ListsController < ApplicationController
   def destroy
     @list.destroy
     respond_to do |format|
-      format.json { render json: true }
+      flash[:success] = 'List was successfully deleted.'
       format.html { redirect_to lists_path }
     end
   end
@@ -56,7 +56,7 @@ class ListsController < ApplicationController
   def is_owner?
     unless current_user == @list.user
       respond_to do |format|
-        format.json { render json: false, status: :forbidden }
+        flash[:error] = 'Sorry. Action not allowed.'
         format.html { redirect_to main_app.root_url }
       end
     end
