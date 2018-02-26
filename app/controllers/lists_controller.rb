@@ -15,7 +15,7 @@ class ListsController < ApplicationController
 
   def create
     @lists = current_user.list
-    @list = List.new(name: list_params_create[:name], type_access: :private_me, status: :open, user: current_user)
+    @list = List.new(name: list_params_create[:name], type_access: :private_me, status: :pend, user: current_user)
     respond_to do |format|
       if @list.save
         flash[:success] = 'List was successfully created.'
@@ -67,7 +67,7 @@ class ListsController < ApplicationController
   end
 
   def list_params_update
-    params.require(:list).permit(:name, :type_access, :status).merge(user: current_user)
+    params.require(:list).permit(:name, :type_access, :status, task_attributes: [:id, :description, :status, :father_id, :_destroy]).merge(user: current_user)
   end
 
   def list_params_create

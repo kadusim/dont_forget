@@ -1,23 +1,24 @@
 <%= form_for @list, url: { action: "update" } do |f| %>
+
+  <!-- Lists -->
   <div class="form-group row">
-    <%= f.label :name, "Name:", class: "col-sm-2 col-form-label" %>
+    <%= f.label :name, "Name", class: "col-sm-2 col-form-label" %>
     <div class="col-sm-10">
       <%= f.text_field :name, class: "form-control validate" %>
     </div>
   </div>
   <div class="form-group row">
-    <%= f.label :type_access, "Type access:", class: "col-sm-2 col-form-label" %>
+    <%= f.label :type_access, "Private?", class: "col-sm-2 col-form-label" %>
     <div class="col-sm-10">
-      <div class="radio">
-        <%= f.radio_button :type_access, :shared_all %> Public
-        <%= f.radio_button :type_access, :private_me %> Private
-      </div>
+      <%= f.check_box(:type_access, {}, :private_me, :shared_all) %>
+      <%= f.object.type_access %>
     </div>
   </div>
   <div class="form-group row">
-    <%= f.label :status, "Status:", class: "col-sm-2 col-form-label" %>
+    <%= f.label :status, "Status", class: "col-sm-2 col-form-label" %>
     <div class="col-sm-10">
-      <%= @list.status %>
+      <td><%= f.check_box(:status, {}, :done, :pend) %></td>
+      <%= f.object.status %>
     </div>
   </div>
   <div class="form-group row">
@@ -25,7 +26,35 @@
       <%= f.submit "Save List", class: "btn btn-primary" %>
     </div>
   </div>
+
+  <!-- Tasks -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Done?</th>
+        <th scope="col">Description</th>
+        <th scope="col">Depending</th>
+        <th scope="col">Status</th>
+        <th scope="col">Delete?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= f.fields_for :task do |ff| %>
+        <tr>
+          <td><%= ff.check_box(:status, {}, :done, :pend) %></td>
+          <td><%= ff.text_field :description %></td>
+          <td><%= ff.text_field :father_id %></td>
+          <td><%= ff.object.status %></td>
+          <% if ff.object.persisted? %>
+            <td><%= ff.check_box :_destroy %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 <% end %>
+
 <div class="form-group row">
   <div class="col-sm-10">
     <%= link_to 'Delete', @list, method: :delete, class: "btn btn-primary", data: { confirm: 'Are you sure?' } %>

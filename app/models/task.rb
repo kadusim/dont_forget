@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :list
 
-  enum status: %i[open done]
+  enum status: %i[pend done]
 
   has_many :child, class_name: "Task",
                   foreign_key: "father_id"

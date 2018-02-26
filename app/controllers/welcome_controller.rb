@@ -1,8 +1,7 @@
 class WelcomeController < ApplicationController
 
   def home
-    have_lists = current_user && current_user.list.count > 0
-    if have_lists
+    if current_user
         redirect_to lists_path
     end
   end
