@@ -15,7 +15,7 @@ class ListsController < ApplicationController
 
   def create
     @lists = current_user.list
-    @list = List.new(name: list_params_create[:name], type_access: :private_me, status: :pend, user: current_user)
+    @list = List.new(name: list_params_create[:name], type_access: :private_me, status: :task_pend, user: current_user)
     respond_to do |format|
       if @list.save
         flash[:success] = 'List was successfully created.'

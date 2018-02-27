@@ -8,9 +8,6 @@
   </div>
   <div class="col-sm-12 col-md-12 col-lg-9">
     <p>Nova lista</p>
-    <%= form_for(List.new) do |f| %>
-    <%= f.text_field :name, class: "validate"%>
-    <%= f.submit %>
-    <% end %>
+    <%= render "shared/new_list" %>
   </div>
 </div>
