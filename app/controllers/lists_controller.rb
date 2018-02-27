@@ -4,18 +4,16 @@ class ListsController < ApplicationController
   before_action :list_params_create, only: [:create]
   before_action :set_list, only: [:show, :edit, :update, :destroy]
   before_action :is_owner?, only: [:show, :update, :destroy]
+  before_action :list_open, only: [:show, :index, :create, :edit]
 
   def show
-    @lists = current_user.list
   end
 
   def index
-    @lists = current_user.list
   end
 
   def create
-    @lists = current_user.list
-    @list = List.new(name: list_params_create[:name], type_access: :private_me, status: :task_pend, user: current_user)
+    @list = List.new(name: list_params_create[:name], type_access: :list_private, status: :list_pend, user: current_user)
     respond_to do |format|
       if @list.save
         flash[:success] = 'List was successfully created.'
@@ -28,7 +26,6 @@ class ListsController < ApplicationController
   end
 
   def edit
-    @lists = current_user.list
   end
 
   def update
@@ -64,6 +61,10 @@ class ListsController < ApplicationController
 
   def set_list
     @list = List.find(params[:id])
+  end
+
+  def list_open
+    @lists = current_user.list.lists_pend
   end
 
   def list_params_update
