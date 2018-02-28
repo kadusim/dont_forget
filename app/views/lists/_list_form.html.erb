@@ -1,17 +1,17 @@
-<%= form_for(setup_list @list) do |form_list| %>
+<p>Don't forget</p>
+
+<%= form_for @list do |form_list| %>
 
   <!-- Lists -->
   <div class="form-group row">
     <div class="col-sm-1">
       <%= form_list.check_box :status, {:checked => form_list.object.list_done?}, :list_done, :list_pend  %>
     </div>
-    <div class="col-sm-11">
+    <div class="col-sm-7">
       <%= form_list.text_field :name, class: "form-control validate" %>
     </div>
-  </div>
-  <div class="form-group row">
-    <%= form_list.label :type_access, "Private:", class: "col-sm-2 col-form-label" %>
-    <div class="col-sm-10">
+    <%= form_list.label :type_access, "Private:", class: "col-sm-1 col-form-label" %>
+    <div class="col-sm-3">
       <%= form_list.check_box(:type_access, {:checked => form_list.object.list_private?}, :list_private, :list_shared) %>
     </div>
   </div>
@@ -23,34 +23,9 @@
   </div>
 
   <!-- Tasks -->
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Task Done?</th>
-        <th scope="col">Description</th>
-        <th scope="col">Depending</th>
-        <th scope="col">Status</th>
-        <th scope="col">Delete?</th>
-      </tr>
-    </thead>
-    <tbody id="tab-task">
-      <%= form_list.fields_for :task do |form_task| %>
-        <tr>
-          <td><%= form_task.check_box(:status, {:checked => form_task.object.task_done?}, :task_done, :task_pend) %></td>
-          <td><%= form_task.text_field :description %></td>
-          <td><%= form_task.text_field :father_id %></td>
-          <td><%= form_task.object.status %></td>
-          <% if form_task.object.persisted? %>
-            <td><%= form_task.check_box :_destroy %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <%= form_list.submit 'New', class: "btn btn-primary" %>
-    </div>
-  </div>
+  <%= form_list.fields_for :tasks do |builder| %>
+    <%= render 'task_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "New task", form_list, :tasks %>
 
 <% end %>

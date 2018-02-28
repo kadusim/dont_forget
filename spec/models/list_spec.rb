@@ -29,7 +29,7 @@ RSpec.describe List, type: :model do
   end
 
   it "has_many List" do
-    assc = described_class.reflect_on_association(:task)
+    assc = described_class.reflect_on_association(:tasks)
     expect(assc.macro).to eq :has_many
   end
 
