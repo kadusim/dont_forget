@@ -7,6 +7,23 @@
     </ul>
   </div>
   <div class="col-sm-12 col-md-12 col-lg-9">
-    <%= render "list_form" %>
+    <p>Don't forget</p>
+
+    <%= @list.name %>
+    <table class="table">
+      <tr>
+        <th>Description</th>
+        <th>Status</th>
+      </tr>
+    <% @list.tasks.each do |task| %>
+      <tr>
+        <td><%= task.description %></td>
+        <td><%= task.status %></td>
+      <tr>
+    <% end %>
+    </table>
+    <% if current_user == @list.user %>
+      <%= link_to 'Edit', edit_list_path(@list), class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
