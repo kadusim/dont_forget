@@ -62,35 +62,20 @@ class ListsController < ApplicationController
 
   def set_list
     @list = List.find(params[:id])
+    # list = List.select(params[:id]).where('father_id == 0')
+    # puts "****************************************"
+    # puts "List: #{list.inspect}"
+    # puts "List.find(params[:id]): #{List.select(params[:id]).methods}"
+    # puts "****************************************"
+    # # puts "List: #{list.class}"
+    # # puts "List: #{list.methods}"
+    # list.tasks.select{ |hash| puts "AKIIII #{hash.inspect}" }
+    # @list = list.tasks.select{ |hash| hash if hash.father_id == 0  }.to_h
+    # puts "@List: #{@list.class}"
   end
 
   def list_open
-    # todos = current_user.list[0].task
-    # puts "TODOS #{todos.inspect}"
-    # first_father = current_user.list[0].task.where(father_id: 0)
-
-    # def list_child father, retorno
-    #   puts "FATHER ID: #{father.id} size #{father.child.size}"
-    #   if father.child.size > 0
-    #     father.child.each { |child_child|
-    #       puts "Adicionou child: #{child_child.id}"
-    #       retorno << child_child.child
-    #       list_child child_child, retorno
-    #     }
-    #   else
-    #     puts "Adicionou pai: #{father.id}"
-    #     retorno << father
-    #   end
-    # end
-    # retorno = []
-    # first_father.each { |father|
-    #   retorno << father
-    #   list_child father, retorno
-    # }
-    # puts "retorno: #{retorno}"
-
     @lists = current_user.lists.lists_pend
-
   end
 
   def list_params_update
