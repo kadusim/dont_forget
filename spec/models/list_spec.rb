@@ -38,4 +38,9 @@ RSpec.describe List, type: :model do
     expect(assc.macro).to eq :belongs_to
   end
 
+  it "has_many Follows" do
+    assc = described_class.reflect_on_association(:follows)
+    expect(assc.macro).to eq :has_many
+  end
+
 end

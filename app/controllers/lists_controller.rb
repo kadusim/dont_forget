@@ -52,7 +52,7 @@ class ListsController < ApplicationController
   private
 
   def is_owner?
-    unless current_user == @list.user
+    unless current_user == @list.users
       respond_to do |format|
         flash[:error] = 'Sorry. Action not allowed.'
         format.html { redirect_to main_app.root_url }
@@ -62,20 +62,11 @@ class ListsController < ApplicationController
 
   def set_list
     @list = List.find(params[:id])
-    # list = List.select(params[:id]).where('father_id == 0')
-    # puts "****************************************"
-    # puts "List: #{list.inspect}"
-    # puts "List.find(params[:id]): #{List.select(params[:id]).methods}"
-    # puts "****************************************"
-    # # puts "List: #{list.class}"
-    # # puts "List: #{list.methods}"
-    # list.tasks.select{ |hash| puts "AKIIII #{hash.inspect}" }
-    # @list = list.tasks.select{ |hash| hash if hash.father_id == 0  }.to_h
-    # puts "@List: #{@list.class}"
   end
 
   def list_open
     @lists = current_user.lists.lists_pend
+    @lists_following = List.joins(:follows)
   end
 
   def list_params_update

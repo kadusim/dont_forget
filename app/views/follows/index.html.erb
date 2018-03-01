@@ -1,0 +1,18 @@
+<p>Follow Index</p>
+
+<table class="table">
+  <tr>
+    <th>User</th>
+    <th>Name</th>
+    <th>Last update</th>
+    <th></th>
+  </td>
+  <% @lists_follow.each do |list| %>
+    <tr>
+      <td><%= find_name_user list %></td>
+      <td><%= list.name %></td>
+      <td><%= list.updated_at %></td>
+      <td><%= link_to 'Follow', follow_path(list_id: list.id), method: :post, class: 'follow-link' %></td>
+    </td>
+  <% end %>
+</table>
