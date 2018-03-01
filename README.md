@@ -4,6 +4,10 @@ Don't forget, is a todo list app to organize life
 
 ## Installation
 
+* Change file name config/database.yml to config/database_prod.yml
+
+* Change file name config/database_dev.yml to config/database.yml
+
 * Run ```rails db:create db:migrate``` to create a database and run all migrations.
 
 * Run ```bundle install``` to install all gems.
