@@ -52,7 +52,7 @@ class ListsController < ApplicationController
   private
 
   def is_owner?
-    unless current_user == @list.users
+    unless current_user == @list.user
       respond_to do |format|
         flash[:error] = 'Sorry. Action not allowed.'
         format.html { redirect_to main_app.root_url }

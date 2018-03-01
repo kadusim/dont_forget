@@ -22,9 +22,6 @@
     <% end %>
     </table>
     <% if current_user == @list.user %>
-    <%= current_user.inspect %>
-    <\ br>
-    <%= @list.user.inspect %>
       <%= link_to 'Edit', edit_list_path(@list), class: "btn btn-primary" %>
     <% else %>
       <%= link_to 'UnFollow', follow_path(user_id: current_user.id, list_id: @list.id), method: :delete, class: 'unfollow-link' %>
