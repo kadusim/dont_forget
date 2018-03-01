@@ -2,6 +2,8 @@
 
 Don't forget, is a todo list app to organize life
 
+https://dontforgetkadusim.herokuapp.com
+
 ## Installation
 
 * Change file name config/database.yml to config/database_prod.yml
