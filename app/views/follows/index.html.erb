@@ -6,6 +6,7 @@
     <th>Name</th>
     <th>Last update</th>
     <th></th>
+    <th></th>
   </td>
   <% @lists_follow.each do |list| %>
     <tr>
@@ -13,6 +14,7 @@
       <td><%= list.name %></td>
       <td><%= list.updated_at %></td>
       <td><%= link_to 'Follow', follow_path(list_id: list.id), method: :post, class: 'follow-link' %></td>
+      <td><%= link_to 'View', list_path(list) %></td>
     </td>
   <% end %>
 </table>
