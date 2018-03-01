@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180301031234) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "follows", force: :cascade do |t|
     t.integer "user_id"
     t.integer "list_id"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20180301031234) do
     t.string "name"
     t.integer "type_access"
     t.integer "status"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_lists_on_user_id"
@@ -32,8 +35,8 @@ ActiveRecord::Schema.define(version: 20180301031234) do
   create_table "tasks", force: :cascade do |t|
     t.string "description"
     t.integer "status"
-    t.integer "list_id"
-    t.integer "father_id"
+    t.bigint "list_id"
+    t.bigint "father_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["father_id"], name: "index_tasks_on_father_id"
@@ -58,4 +61,6 @@ ActiveRecord::Schema.define(version: 20180301031234) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "lists", "users"
+  add_foreign_key "tasks", "lists"
 end
