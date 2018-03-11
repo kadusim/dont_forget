@@ -1,14 +1,11 @@
-$(document).on("turbolinks:load", function() {
-  $('form').on('click', '.remove_fields', function(event) {
-    $(this).prev('input[type=hidden]').val('1');
-    $(this).closest('fieldset').hide();
-    return event.preventDefault();
-  });
-  return $('form').on('click', '.add_fields', function(event) {
-    var regexp, time;
-    time = new Date().getTime();
-    regexp = new RegExp($(this).data('id'), 'g');
-    $(this).before($(this).data('fields').replace(regexp, time));
-    return event.preventDefault();
-  });
-});
+function add_task(element, content) {
+	var new_id = new Date().getTime();
+	var regexp = new RegExp("new_id", "g")
+	var new_content = content.replace(regexp, new_id);
+	$(element).parent().before(new_content);
+}
+
+function remove_task(element) {
+	$(element).prev("input[type=hidden]").val("1");
+	$(element).closest(".task_item").hide();
+}

@@ -23,9 +23,12 @@
   </div>
 
   <!-- Tasks -->
-  <%= form_list.fields_for :tasks do |builder| %>
-    <%= render 'task_fields', f: builder %>
+  <%= form_list.fields_for :tasks do |t| %>
+    <%= render 'task_fields', task: t %>
   <% end %>
-  <%= link_to_add_fields "New task", form_list, :tasks %>
+
+  <div class="new_content">
+    <%= link_to_add_task (image_tag "add.png"), form_list, :tasks %>
+  </div>
 
 <% end %>

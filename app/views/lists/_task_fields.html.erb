@@ -1,10 +1,6 @@
-<fieldset>
-  <div>
-    <%= f.object.id %>
-    <%= f.check_box(:status, {:checked => f.object.task_done?}, :task_done, :task_pend) %>
-    <%= f.text_field :description %>
-    <%= f.text_field :father_id %>
-    <%= f.hidden_field :_destroy %>
-    <%= link_to "remove", '#', class: "remove_fields" %>
-  </div>
-</fieldset>
+<div class="task_item">
+  <%= task.check_box(:status, {:checked => task.object.task_done?}, :task_done, :task_pend) %>
+  <%= task.text_field :description %>
+  <%= task.hidden_field :father_id %>
+  <%= link_to_remove_task (image_tag "remove.png"), task %>
+</div>
