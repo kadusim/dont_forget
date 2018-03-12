@@ -48,6 +48,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   # Webdriver for js
   gem 'selenium-webdriver'
+  # Easy installation and use of chromedriver, the Chromium project's selenium webdriver adapter. https://github.com/flavorjones/chromedriver-helper
+  gem 'chromedriver-helper'
 end
 
 group :test do

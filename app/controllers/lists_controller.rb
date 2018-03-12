@@ -3,7 +3,7 @@ class ListsController < ApplicationController
 
   before_action :list_params_create, only: [:create]
   before_action :set_list, only: [:edit, :update, :destroy, :show]
-  before_action :is_owner?, only: [:update, :destroy]
+  before_action :is_owner?, only: [:edit, :update, :destroy]
   before_action :list_open, only: [:index, :create, :edit, :show]
 
   def index
