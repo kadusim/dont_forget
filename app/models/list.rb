@@ -13,14 +13,14 @@ class List < ApplicationRecord
   enum status:      %i[list_pend list_done]
 
   validates_presence_of :name, :type_access, :status, :user
-	before_validation     :load_defaults
+  before_validation     :load_defaults
 
-	def load_defaults
-		if self.new_record?
-			self.type_access = :list_private
-			self.status      = :list_pend
-		end
-	end
+  def load_defaults
+    if self.new_record?
+      self.type_access = :list_private
+      self.status      = :list_pend
+    end
+  end
 
   scope :lists_pend, -> { where(status: :list_pend) }
 end

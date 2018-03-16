@@ -24,7 +24,7 @@
     <% @list.tasks.each do |task| %>
       <tr>
         <td><%= task.description %></td>
-				<td><%= task.status.delete "task_" %></td>
+  			<td><%= task.status.delete "task_" %></td>
       <tr>
     <% end %>
     </table>
