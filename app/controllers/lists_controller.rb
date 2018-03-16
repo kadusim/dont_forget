@@ -1,16 +1,16 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :list_params_create, only: [:create]
-  before_action :set_list, only: [:edit, :update, :destroy, :show]
-  before_action :is_owner?, only: [:edit, :update, :destroy]
-  before_action :list_open, only: [:index, :create, :edit, :show]
+  before_action :list_params_create, only:   [:create]
+  before_action :set_list,           only: %i[edit update destroy show]
+  before_action :is_owner?,          only: %i[edit update destroy]
+  before_action :list_open,          only: %i[index create edit show]
 
   def index
   end
 
   def create
-    @list = List.new(name: list_params_create[:name], type_access: :list_private, status: :list_pend, user: current_user)
+		@list = List.new(list_params_create)
     respond_to do |format|
       if @list.save
         flash[:success] = 'List was successfully created.'
@@ -70,10 +70,17 @@ class ListsController < ApplicationController
   end
 
   def list_params_update
-    params.require(:list).permit(:name, :type_access, :status, tasks_attributes: [:id, :description, :status, :father_id, :_destroy]).merge(user: current_user)
+    params.require(:list).permit(:name, 
+																 :type_access, 
+																 :status, 
+																 tasks_attributes: [:id, 
+																		                :description, 
+																										:status, 
+																										:father_id, 
+																										:_destroy]).merge(user: current_user)
   end
 
   def list_params_create
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name).merge(user: current_user)
   end
 end

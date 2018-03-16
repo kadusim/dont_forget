@@ -6,15 +6,13 @@
     <th>Name</th>
     <th>Last update</th>
     <th></th>
-    <th></th>
   </td>
   <% @lists_follow.each do |list| %>
     <tr>
       <td><%= find_name_user list %></td>
-      <td><%= list.name %></td>
+      <td><%= link_to list.name, list_path(list) %></td>
       <td><%= list.updated_at %></td>
-      <td><%= link_to 'Follow', follow_path(list_id: list.id), method: :post, class: 'follow-link' %></td>
-      <td><%= link_to 'View', list_path(list) %></td>
+      <td><%= link_to (image_tag 'follow.png'), follow_path(list_id: list.id), method: :post, class: 'follow-link' %></td>
     </td>
   <% end %>
 </table>
