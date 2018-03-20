@@ -1,0 +1,22 @@
+<p>Follow Index</p>
+
+<table class="table">
+  <tr>
+    <th>User</th>
+    <th>Name</th>
+    <th>Last update</th>
+    <th></th>
+  </td>
+  <% @lists_follow.each do |list| %>
+    <tr>
+      <td><%= find_name_user list %></td>
+      <td><%= link_to list.name, list_path(list) %></td>
+      <td><%= list.updated_at %></td>
+      <% if current_user.following?(list) %>
+        <td><%= link_to (image_tag 'follow.png'), follow_path(list_id: list.id), method: :post, class: 'follow-link' %></td>
+      <% else %>
+        <td><%= link_to (image_tag 'unfollow.png'), follow_path(list_id: list.id), method: :post, class: 'follow-link' %></td>
+      <% end %>
+    </td>
+  <% end %>
+</table>

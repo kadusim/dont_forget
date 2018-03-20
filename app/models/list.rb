@@ -22,5 +22,6 @@ class List < ApplicationRecord
     end
   end
 
-  scope :lists_pend, -> { where(status: :list_pend) }
+  scope :lists_pend,   -> { where(status: :list_pend) }
+  scope :lists_shared, -> { where(type_access: :list_shared) }
 end

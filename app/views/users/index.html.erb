@@ -1,0 +1,15 @@
+<p>User Index</p>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Lists</th>
+  </td>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <!-- <td><%# link_to user.lists.count, list_path(list) %></td> -->
+      <td><%= user.lists.count %></td>
+    </td>
+  <% end %>
+</table>

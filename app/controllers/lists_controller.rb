@@ -65,8 +65,8 @@ class ListsController < ApplicationController
   end
 
   def list_open
-    @lists = current_user.lists.lists_pend
-    @lists_following = List.joins(:follows)
+    @lists           = current_user.lists.lists_pend
+    @lists_following = current_user.following
   end
 
   def list_params_update
