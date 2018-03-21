@@ -1,0 +1,20 @@
+<p>User</p>
+
+<p> <%= @user.name %> </p>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Created</th>
+    <th>Last Update</th>
+  </tr>
+  <% @user.lists.each do |list| %>
+    <tr>
+      <td><%= link_to list.name, list_path(list) %></td>
+      <td><%= list.status %></td>
+      <td><%= list.created_at.to_s(:date_formated) %></td>
+      <td><%= list.updated_at.to_s(:date_formated) %></td>
+    </tr>
+  <% end %>
+</table>

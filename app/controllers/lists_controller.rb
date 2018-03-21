@@ -9,6 +9,9 @@ class ListsController < ApplicationController
   def index
   end
 
+  def show
+  end
+
   def create
     @list = List.new(list_params_create)
     respond_to do |format|

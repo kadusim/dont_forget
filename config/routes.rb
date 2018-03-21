@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   resources :lists,     except: [:new]
   resources :favorites, only:   [:create, :destroy, :index]
-  resources :users,     only:   [:index]
+  # resources :users
+  get '/user/:id', to: "users#show",  as: "user"
+  get '/users',     to: "users#index", as: "users"
 
   # Customize devise
   devise_for :users, :controllers => { registrations: 'registrations' }

@@ -3,12 +3,11 @@
 <table class="table">
   <tr>
     <th>Name</th>
-    <th>Lists</th>
+    <th>Qtd Lists</th>
   </td>
   <% @users.each do |user| %>
     <tr>
-      <td><%= user.name %></td>
-      <!-- <td><%# link_to user.lists.count, list_path(list) %></td> -->
+      <td><%= link_to user.name, user_path(user) %></td>
       <td><%= user.lists.count %></td>
     </td>
   <% end %>

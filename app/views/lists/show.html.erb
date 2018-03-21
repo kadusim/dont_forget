@@ -13,7 +13,16 @@
     <% if current_user == @list.user %>
       <%= link_to (image_tag "edit.png"), edit_list_path(@list) %>
     <% else %>
-      <%= link_to (image_tag "unfollow.png"), follow_path(user_id: current_user.id, list_id: @list.id), method: :delete, class: 'unfollow-link' %>
+      <% if current_user.following?(@list) %>
+        <%= form_for(current_user.active_favorites.find_by(list_followed_id: @list.id), html: { method: :delete }) do |f| %>
+          <%= f.submit 'Unfollow', class: "btn btn-primary" %>
+        <% end %>
+      <% else %>
+        <%= form_for(current_user.active_favorites.build) do |f| %>
+          <div><%= hidden_field_tag :list_followed_id, @list.id %></div>
+          <%= f.submit 'Follow', class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
     <% end %>
 
     <table class="table">
