@@ -1,6 +1,4 @@
-<li class="list-group-item d-flex justify-content-between align-items-center">
-  <%= form_for(List.new) do |f| %>
-    <%= f.text_field :name, class: "validate"%>
-    <%= f.submit 'New List', class: "btn btn-primary" %>
-  <% end %>
-</li>
+<%= form_for(List.new) do |f| %>
+  <%= f.text_field :name, class: "validate menu-fields" %>
+  <%= f.submit 'New List', class: "btn btn-primary" %>
+<% end %>

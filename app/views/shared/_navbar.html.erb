@@ -2,22 +2,23 @@
   <a class="navbar-brand" href="/">
     <%= image_tag("logo.png") %>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+  <div class="collapse navbar-collapse" id="navbarToggler">
 
     <% if current_user %>
 
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
             <%= current_user.name %>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <%= link_to('Find Users', users_path, class: "dropdown-item") %>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to('Config', edit_user_registration_path, class: "dropdown-item") %>
+            <%= link_to('Find Users', users_path, class: "dropdown-item") %>
+            <div class="dropdown-divider"></div>
             <%= link_to('Sign out', destroy_user_session_path, :method => :delete, class: "dropdown-item") %>
           </div>
         </li>
@@ -25,7 +26,7 @@
 
     <% else %>
 
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <%= link_to 'Log in', new_user_session_path, class: "nav-link" %>
         </li>
