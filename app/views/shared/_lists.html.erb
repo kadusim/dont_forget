@@ -1,15 +1,15 @@
 <p>My Lists</p>
-<ul class="list-group">
+<ul class="list-group list-group-flush">
   <% @lists.each do |l| %>
-    <%= link_to l.name, list_path(l), class: "list-group-item d-flex justify-content-between align-items-center" %>
+    <%= link_to l.name, list_path(l), class: "list-group-item d-flex justify-content-between align-items-center list-group-item-action" %>
   <% end %>
 </ul>
 <%= render "shared/new_list" %>
 
 <p>Follow Lists</p>
-<ul class="list-group">
+<ul class="list-group list-group-flush">
   <% @lists_following.each do |lf| %>
-    <%= link_to lf.name, list_path(lf), class: "list-group-item d-flex justify-content-between align-items-center" %>
+    <%= link_to lf.name, list_path(lf), class: "list-group-item d-flex justify-content-between align-items-center list-group-item-action" %>
   <% end %>
 </ul>
 

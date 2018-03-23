@@ -4,34 +4,38 @@
     <%= render "shared/lists" %>
   </div>
   <div class="col-sm-12 col-md-12 col-lg-9">
-    <p>Don't forget</p>
+    <p>Today is <%= Date.current().to_formatted_s(:long) %></p>
 
-    <%= @list.name %>
+    <div class="float-left">
+    <p><%= @list.name %></p>
+    </div>
 
+    <div class="float-right">
     <% if current_user == @list.user %>
       <%= link_to (image_tag "edit.png"), edit_list_path(@list) %>
     <% else %>
       <% if current_user.following?(@list) %>
         <%= form_for(current_user.active_favorites.find_by(list_followed_id: @list.id), html: { method: :delete }) do |f| %>
-          <%= f.submit 'Unfollow', class: "btn btn-primary" %>
+          <%= image_submit_tag('follow.png') %>
         <% end %>
       <% else %>
         <%= form_for(current_user.active_favorites.build) do |f| %>
           <div><%= hidden_field_tag :list_followed_id, @list.id %></div>
-          <%= f.submit 'Follow', class: "btn btn-primary" %>
+          <%= image_submit_tag('unfollow.png') %>
         <% end %>
       <% end %>
     <% end %>
+    </div>
 
     <table class="table">
       <tr>
         <th>Description</th>
-        <th>Status</th>
+        <th class="text-right">Status</th>
       </tr>
     <% @list.tasks.each do |task| %>
       <tr>
         <td><%= task.description %></td>
-  			<td><%= task.status.delete "task_" %></td>
+  			<td class="text-right"><%= image_tag task.task_pend? ? 'pend.png' : 'done.png' %></td>
       <tr>
     <% end %>
     </table>

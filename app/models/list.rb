@@ -1,6 +1,5 @@
 class List < ApplicationRecord
   has_many :follows
-  # has_many :users, through: :follows
 
   belongs_to :user
   has_many   :tasks, dependent: :destroy
