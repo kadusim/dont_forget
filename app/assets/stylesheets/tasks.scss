@@ -1,3 +1,10 @@
-// Place all the styles related to the Tasks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.task_item input {
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  margin: 0.6rem;
+  padding: 0.375rem 0.75rem;
+}
+
+input.description {
+  width: 75%;
+}

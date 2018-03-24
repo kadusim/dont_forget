@@ -1,17 +1,29 @@
-.task_item input {
-  margin: 0.6rem;
-}
-
-input.description {
-  width: 75%;
-}
-
 .menu-fields {
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
   margin-top: 0.5rem;
-  width: 100%;
   padding: 0.75rem 1.25rem;
+  width: 100%;
 }
 
 .btn {
   margin: 0.5rem;
+}
+
+.p-title {
+  background-color: #E7E7E9;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 1.3rem;
+  margin: 0.2rem auto 0.2rem;
+}
+
+.p-subtitle {
+  background-color: #F8F9FA;
+  font-size: 1.1rem;
+  margin: 0.2rem auto 0.2rem;
+}
+
+.form-group {
+  margin: 1rem auto;
 }

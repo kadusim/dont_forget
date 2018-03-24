@@ -1,5 +1,7 @@
  @import "bootstrap";
  @import "lists";
+ @import "tasks";
+ @import "navbar";
 
 .message-fixed-box {
   height: 3.5em;
@@ -8,4 +10,13 @@
 body {
   margin: 0;
   padding: 0;
+}
+
+p {
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.btn {
+  min-width: 7rem;
 }

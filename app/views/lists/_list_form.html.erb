@@ -1,28 +1,26 @@
-<p>Today is <%= Date.current().to_formatted_s(:long) %></p>
-
 <%= form_for @list do |form_list| %>
 
-  <div class="row">
-    <div class="col-sm-1">
+  <div class="row p-subtitle">
+    <div class="col-2">
       <p>Done</p>
     </div>
-    <div class="col-sm-10">
+    <div class="col-8">
       <p>Name</p>
     </div>
-    <div class="col-sm-1 text-right">
+    <div class="col-2 text-right">
       <p>Private</p>
     </div>
   </div>
 
   <!-- Lists -->
   <div class="form-group row">
-    <div class="col-sm-1">
+    <div class="col-2">
       <%= form_list.check_box :status, {:checked => form_list.object.list_done?}, :list_done, :list_pend  %>
     </div>
-    <div class="col-sm-10">
-      <%= form_list.text_field :name, class: "form-control validate" %>
+    <div class="col-8">
+      <%= form_list.text_field :name, class: "form-control validate", required: true %>
     </div>
-    <div class="col-sm-1 text-right">
+    <div class="col-2 text-right">
       <%= form_list.check_box(:type_access, {:checked => form_list.object.list_private?}, :list_private, :list_shared) %>
     </div>
   </div>

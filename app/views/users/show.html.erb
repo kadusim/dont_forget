@@ -1,6 +1,10 @@
-<p>User</p>
+<div class="row p-title">
+  <p>User</p>
+</div>
 
-<p> <%= @user.name %> </p>
+<div class="row p-subtitle">
+  <p> <%= @user.name %> </p>
+</div>
 
 <table class="table">
   <tr>
@@ -12,7 +16,8 @@
   <% @user.lists.each do |list| %>
     <tr>
       <td><%= link_to list.name, list_path(list) %></td>
-      <td><%= list.status %></td>
+      <!-- <td><%# list.status %></td> -->
+      <td><%= image_tag list.list_pend? ? 'pend.png' : 'done.png' %></td>
       <td><%= list.created_at.to_s(:date_formated) %></td>
       <td><%= list.updated_at.to_s(:date_formated) %></td>
     </tr>

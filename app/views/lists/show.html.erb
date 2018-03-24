@@ -1,13 +1,12 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 col-lg-3">
-    <h4>Lists</h4>
     <%= render "shared/lists" %>
   </div>
   <div class="col-sm-12 col-md-12 col-lg-9">
-    <p>Today is <%= Date.current().to_formatted_s(:long) %></p>
+    <%= render "shared/today_time" %>
 
     <div class="float-left">
-    <p><%= @list.name %></p>
+      <p><%= @list.name %></p>
     </div>
 
     <div class="float-right">

@@ -1,4 +1,4 @@
 <%= form_for(List.new) do |f| %>
-  <%= f.text_field :name, class: "validate menu-fields" %>
+  <%= f.text_field :name, class: "validate menu-fields", required: true %>
   <%= f.submit 'New List', class: "btn btn-primary" %>
 <% end %>
