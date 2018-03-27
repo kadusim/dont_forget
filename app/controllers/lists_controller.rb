@@ -1,10 +1,9 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :list_params_create, only:   [:create]
-  before_action :set_list,           only: %i[edit update destroy show]
-  before_action :is_owner?,          only: %i[edit update destroy]
-  before_action :list_open,          only: %i[index create edit show]
+  before_action :set_list,  only: %i[edit update destroy show]
+  before_action :is_owner?, only: %i[edit update destroy]
+  before_action :list_open, only: %i[index create edit show]
 
   def index
   end
@@ -13,15 +12,11 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = List.new(list_params_create)
-    respond_to do |format|
-      if @list.save
-        flash[:success] = 'List was successfully created.'
-        format.html { redirect_to edit_list_path(@list) }
-      else
-        flash[:error] = 'Could not created List.'
-        format.html { redirect_to lists_path }
-      end
+    @list = List.new(list_params)
+    if @list.save
+      redirect_to edit_list_path(@list), notice: 'List was successfully created.'
+    else
+      redirect_to lists_path, notice: 'Could not created List.'
     end
   end
 
@@ -29,37 +24,28 @@ class ListsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @list.update(list_params_update)
-        flash[:success] = 'List was successfully saved.'
-        if @list.status == "list_done"
-          format.html { redirect_to root_path }
-        else
-          format.html { redirect_to edit_list_path(@list) }
-        end
+    if @list.update(list_params)
+      flash[:success] = 'List was successfully saved.'
+      if @list.status == "list_done"
+        redirect_to root_path
       else
-        flash[:error] = 'Could not saved List.'
-        format.html { redirect_to lists_path }
+        redirect_to edit_list_path(@list)
       end
+    else
+      redirect_to lists_path, notice: 'Could not saved List.'
     end
   end
 
   def destroy
     @list.destroy
-    respond_to do |format|
-      flash[:success] = 'List was successfully deleted.'
-      format.html { redirect_to lists_path }
-    end
+    redirect_to lists_path, notice: 'List was successfully deleted.'
   end
 
   private
 
   def is_owner?
     unless current_user == @list.user
-      respond_to do |format|
-        flash[:error] = 'Sorry. Action not allowed.'
-        format.html { redirect_to main_app.root_url }
-      end
+      redirect_to main_app.root_url, notice: 'Sorry. Action not allowed.'
     end
   end
 
@@ -72,7 +58,7 @@ class ListsController < ApplicationController
     @lists_following = current_user.following
   end
 
-  def list_params_update
+  def list_params
     params.require(:list).permit(:name,
                                  :type_access,
                                  :status,
@@ -83,7 +69,4 @@ class ListsController < ApplicationController
                                                     :_destroy]).merge(user: current_user)
   end
 
-  def list_params_create
-    params.require(:list).permit(:name).merge(user: current_user)
-  end
 end

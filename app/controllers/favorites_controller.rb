@@ -8,13 +8,13 @@ class FavoritesController < ApplicationController
   def create
     list = List.find(params[:list_followed_id])
     current_user.follow(list)
-    redirect_to list_path(list)
+    redirect_to list_path(list), notice: 'Follow was successfully created.'
   end
 
   def destroy
     list = Favorite.find(params[:id]).list_followed
     current_user.unfollow(list)
-    redirect_to list_path(list)
+    redirect_to list_path(list), notice: 'Follow was successfully destroyed.'
   end
 
 end
