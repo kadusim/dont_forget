@@ -50,7 +50,7 @@ class ListsController < ApplicationController
   end
 
   def set_list
-    @list = List.find(params[:id])
+    @list = List.includes(:tasks).where(tasks: { father_id: nil } ).find(params[:id])
   end
 
   def list_open
@@ -66,7 +66,8 @@ class ListsController < ApplicationController
                                                     :description,
                                                     :status,
                                                     :father_id,
-                                                    :_destroy]).merge(user: current_user)
+                                                    :_destroy,
+                                                    child_attributes: {}]).merge(user: current_user)
   end
 
 end

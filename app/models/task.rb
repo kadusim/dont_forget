@@ -5,6 +5,7 @@ class Task < ApplicationRecord
 
   has_many :child, class_name: "Task",
                   foreign_key: "father_id"
+  accepts_nested_attributes_for :child
 
   belongs_to :father, class_name: "Task", optional: true
 
