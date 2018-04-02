@@ -3,11 +3,19 @@ class Task < ApplicationRecord
 
   enum status: %i[task_pend task_done]
 
-  has_many :child, class_name: "Task",
-                  foreign_key: "father_id"
-  accepts_nested_attributes_for :child
+  has_many :subtasks, dependent: :destroy
 
-  belongs_to :father, class_name: "Task", optional: true
+  accepts_nested_attributes_for :subtasks,
+                                :allow_destroy => true,
+                                reject_if: proc { |attributes| attributes['description'].blank? }
 
   validates_presence_of :description, :status, :list
+
+  before_validation     :load_defaults
+
+  def load_defaults
+    if self.new_record?
+      self.status      = :task_pend
+    end
+  end
 end

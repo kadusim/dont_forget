@@ -10,7 +10,7 @@ function remove_task(element) {
 	$(element).closest(".task_item").hide();
 }
 
-function remove_child(element) {
+function remove_subtask(element) {
 	$(element).prev("input[type=hidden]").val("1");
-	$(element).closest(".task_child").hide();
+	$(element).closest(".subtask_item").hide();
 }

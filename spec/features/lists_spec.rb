@@ -51,15 +51,17 @@ RSpec.feature "List", type: :feature do
 
       scenario "user create a new task", js: true do
         expect(page).to have_content 'List was successfully saved.'
-        expect(find(:css, "input[id$='description']").value).to have_content 'My new task'
+        expect(page).to have_content 'My new task'
       end
 
       scenario "user delete a task", js: true do
+        click_link "Edit"
         click_link "Remove"
         expect(page).to_not have_css('.task_item')
       end
 
       scenario "user delete a task and save list", js: true do
+        click_link "Edit"
         click_link "Remove"
         expect(page).to_not have_css('.task_item')
         click_button "Save"

@@ -29,7 +29,7 @@ class ListsController < ApplicationController
       if @list.status == "list_done"
         redirect_to root_path
       else
-        redirect_to edit_list_path(@list)
+        redirect_to list_path(@list)
       end
     else
       redirect_to lists_path, notice: 'Could not saved List.'
@@ -50,7 +50,7 @@ class ListsController < ApplicationController
   end
 
   def set_list
-    @list = List.includes(:tasks).order("tasks.status").find(params[:id])
+    @list = List.includes(:tasks).find(params[:id])
   end
 
   def list_open
@@ -65,8 +65,12 @@ class ListsController < ApplicationController
                                  tasks_attributes: [:id,
                                                     :description,
                                                     :status,
-                                                    :father_id,
-                                                    :_destroy]).merge(user: current_user)
+                                                    :_destroy,
+                                 subtasks_attributes: [:id,
+                                                       :description,
+                                                       :status,
+                                                       :task_id,
+                                                       :_destroy]]).merge(user: current_user)
   end
 
 end

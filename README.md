@@ -2,6 +2,8 @@
 
 Don't forget, is a todo list app to organize life
 
+![image](/public/print.png)
+
 https://dontforgetkadusim.herokuapp.com
 
 ## Installation
@@ -27,3 +29,4 @@ The capybara and rspec gems are used for testing. The following command should r
 ```
 rspec
 ```
+

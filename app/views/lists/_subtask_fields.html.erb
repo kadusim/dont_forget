@@ -1,0 +1,6 @@
+<div class="subtask_item">
+  <%= task.check_box(:status, {:checked => task.object.task_done?}, :task_done, :task_pend) %>
+  <%= task.text_field :description, class: "description" %>
+  <%= link_to_remove_task (image_tag "remove.png"), task %>
+</div>
+

@@ -5,7 +5,7 @@
   <div class="col-sm-12 col-md-12 col-lg-9">
     <%= render "shared/today_time" %>
 
-    <div class="float-left">
+    <div class="float-left p-title">
       <p><%= @list.name %></p>
     </div>
 
@@ -27,15 +27,21 @@
     </div>
 
     <table class="table">
-      <tr>
+      <tr class="table-active">
         <th>Description</th>
         <th class="text-right">Status</th>
       </tr>
     <% @list.tasks.each do |task| %>
-      <tr>
+      <tr class="p-title">
         <td><%= task.description %></td>
   			<td class="text-right"><%= image_tag task.task_pend? ? 'pend.png' : 'done.png' %></td>
       <tr>
+      <% task.subtasks.each do |subtask| %>
+      <tr>
+        <td><%= subtask.description %></td>
+  			<td class="text-right"><%= image_tag subtask.task_pend? ? 'pend.png' : 'done.png' %></td>
+      <tr>
+      <% end %>
     <% end %>
     </table>
   </div>

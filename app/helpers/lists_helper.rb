@@ -8,6 +8,10 @@ module ListsHelper
   end
 
   def link_to_remove_task(name, field)
-    field.hidden_field(:_destroy, as: :hidden) + link_to(name, '#', onclick: "remove_task(this); return false;")
+    if field.object.class == Task
+      field.hidden_field(:_destroy, as: :hidden) + link_to(name, '#', onclick: "remove_task(this); return false;")
+    else
+      field.hidden_field(:_destroy, as: :hidden) + link_to(name, '#', onclick: "remove_subtask(this); return false;")
+    end
   end
 end
