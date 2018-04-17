@@ -2,15 +2,19 @@
   <p>User Index</p>
 </div>
 
-<table class="table">
+<div>
+  <%= text_field_tag :search, nil, class: "search", placeholder: "Search..." %>
+</div>
+
+<table class="table" id="usersTable">
   <tr>
     <th>Name</th>
     <th>Number of lists</th>
-  </td>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= link_to user.name, user_path(user) %></td>
-      <td><%= user.lists.count %></td>
     </td>
-  <% end %>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, user_path(user) %></td>
+        <td><%= user.lists.count %></td>
+        </td>
+      <% end %>
 </table>
