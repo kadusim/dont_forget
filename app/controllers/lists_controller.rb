@@ -9,6 +9,11 @@ class ListsController < ApplicationController
   end
 
   def show
+    if current_user != @list.user
+      unless @list.list_shared?
+        redirect_to main_app.root_url, notice: 'Sorry. Action not allowed.', status: :forbidden
+      end
+    end
   end
 
   def create
